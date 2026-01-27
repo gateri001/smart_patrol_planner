@@ -12,7 +12,7 @@
 |
 v
 +-------------------+
-| DATA INGESTION    |
+|  DATA INGESTION   |
 +-------------------+
 | - Collect reports |
 | - Anonymize data  |
@@ -40,7 +40,7 @@ v
 v
 +-------------------+
 | SMART PATROL      |
-|   OPTIMIZER       |
+|    OPTIMIZER      |
 +-------------------+
 | Inputs: heatmap,  |
 | GPS, traffic, fuel|
@@ -49,14 +49,14 @@ v
 +-------------------+
 |          |
 v          v
-+-----------+  +-------------------+
-| HUMAN-IN- |  | COMMAND DASHBOARD |
-| THE-LOOP  |  +-------------------+
-| Dispatcher|  | - Live map        |
-| approves  |  | - AI suggestions  |
-| or overrides   | - KPIs (time,   |
-+-----------+    |   coverage, use)|
-+-----------------+
++-----------+   +-------------------+
+| HUMAN-IN- |   | COMMAND DASHBOARD |
+| THE-LOOP  |   +-------------------+
+| Dispatcher|   | - Live map        |
+| approves  |   | - AI suggestions  |
+| or overrides   | - KPIs (time,    |
++-----------+    |   coverage, use) |
++------------------+
 |
 v
 +-------------------+
