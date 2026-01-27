@@ -9,8 +9,8 @@
 | - Incident logs   |
 | - Map & traffic   |
 +-------------------+
-          |
-          v
+|
+v
 +-------------------+
 | DATA INGESTION    |
 +-------------------+
@@ -18,8 +18,8 @@
 | - Anonymize data  |
 | - Encrypt storage |
 +-------------------+
-          |
-          v
+|
+v
 +-------------------+
 | EVENT INTELLIGENCE|
 +-------------------+
@@ -27,8 +27,8 @@
 | - Risk score 0-100|
 | - Explanation     |
 +-------------------+
-          |
-          v
+|
+v
 +-------------------+
 | PREDICTIVE RISK   |
 +-------------------+
@@ -36,8 +36,8 @@
 | - 24–72 hr window |
 | - Context factors |
 +-------------------+
-          |
-          v
+|
+v
 +-------------------+
 | SMART PATROL      |
 |   OPTIMIZER       |
@@ -47,8 +47,8 @@
 | Outputs: routes,  |
 | zones, shift plans|
 +-------------------+
-     |          |
-     v          v
+|          |
+v          v
 +-----------+  +-------------------+
 | HUMAN-IN- |  | COMMAND DASHBOARD |
 | THE-LOOP  |  +-------------------+
@@ -56,9 +56,9 @@
 | approves  |  | - AI suggestions  |
 | or overrides   | - KPIs (time,   |
 +-----------+    |   coverage, use)|
-                 +-----------------+
-                          |
-                          v
++-----------------+
+|
+v
 +-------------------+
 | ETHICS & BIAS     |
 |     MONITOR       |
