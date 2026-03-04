@@ -5,7 +5,7 @@ def run_bias_check(dataset_path="../datasets/sample_incidents.csv"):
     df = pd.read_csv(dataset_path)
 
     # Group by region (or any relevant column)
-    region_counts = df['region'].value_counts(normalize=True) * 100
+    region_counts = df['area'].value_counts(normalize=True) * 100
 
     print("=== Bias Check Report ===")
     print("Distribution of incidents by region (%):")
