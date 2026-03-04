@@ -4,6 +4,7 @@ import sqlite3
 
 app = FastAPI()
 
+
 # Define schemas
 class OfficerReport(BaseModel):
     officer_id: str
