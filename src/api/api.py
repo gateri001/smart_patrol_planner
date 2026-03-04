@@ -22,4 +22,11 @@ def predict_hotspot_api(incident: Incident):
     return {
         "region": incident.region,
         "incident_type": incident.incident_type,
-        "predicted_risk":
+        "predicted_risk": risk,
+        "message": f"Crime hotspot risk for {incident.region} is {risk}"
+    }
+@app.get("/")
+def root():
+    return {"message": "Smart Patrol backend is running"}
+
+
