@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Smart Patrol Emergency Command Center</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#0b0f19;
+color:white;
+}
+
+header{
+background:#121a2f;
+padding:15px;
+font-size:22px;
+text-align:center;
+}
+
+.container{
+display:flex;
+}
+
+#map{
+height:600px;
+width:70%;
+}
+
+.sidebar{
+width:30%;
+padding:15px;
+background:#111827;
+}
+
+input,select,button{
+width:100%;
+margin-top:10px;
+padding:8px;
+}
+
+button{
+background:#2563eb;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+.alert{
+background:#7f1d1d;
+padding:10px;
+margin-top:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>Smart Patrol Emergency Command Center</header>
+<div style="text-align:center; padding:5px; background:#065f46;">
+🟢 System Status: All Emergency Monitoring Systems Operational
+</div>
+
+<div class="container">
+
+<iframe 
+src="../visualization/heatmap.html"
+width="70%"
+height="600"
+style="border:none">
+</iframe>
+
+<div class="sidebar">
+
+<h3>Report Emergency</h3>
+
+<select id="type">
+<option>flood</option>
+<option>fire</option>
+<option>accident</option>
+<option>crime</option>
+</select>
+
+<input id="area" placeholder="Area (eg Kibera)">
+
+<button onclick="reportEmergency()">Report</button>
+
+<div id="reportResult"></div>
+
+<h3>AI Prediction</h3>
+
+<input id="predictArea" placeholder="Area">
+
+<select id="predictType">
+<option>theft</option>
+<option>robbery</option>
+<option>assault</option>
+<option>burglary</option>
+</select>
+
+<button onclick="predictRisk()">Predict</button>
+
+<div id="predictionResult"></div>
+
+<h3>Live Alerts</h3>
+
+<div id="alerts"></div>
+
+</div>
+
+</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+
+var map = L.map('map').setView([-1.286389,36.817223],11);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+maxZoom:19
+}).addTo(map);
+
+function reportEmergency(){
+
+let type=document.getElementById("type").value
+let area=document.getElementById("area").value
+
+fetch("http://127.0.0.1:8000/report-emergency",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+type:type,
+area:area,
+description:"user report",
+timestamp:"2026-03-20 14:00"
+})
+
+})
+
+.then(res=>res.json())
+
+.then(data=>{
+
+document.getElementById("reportResult").innerText=data.alert
+
+let alertBox=document.createElement("div")
+alertBox.className="alert"
+alertBox.innerText=data.alert
+document.getElementById("alerts").prepend(alertBox)
+
+
+
+// Add marker to map iframe
+let iframe = document.querySelector("iframe").contentWindow
+
+iframe.postMessage({
+    type:"incident",
+    area:area
+},"*")
+
+})
+
+}
+
+function predictRisk(){
+
+let area=document.getElementById("predictArea").value
+let type=document.getElementById("predictType").value
+
+fetch("http://127.0.0.1:8000/predict",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+region:area,
+incident_type:type,
+timestamp:"2026-03-20 14:00"
+})
+
+})
+
+.then(res=>res.json())
+
+.then(data=>{
+
+document.getElementById("predictionResult").innerText=
+"Predicted Risk: "+data.predicted_risk
+
+})
+
+}
+
+</script>
+
+</body>
+</html>
